@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Elegan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffffff, #fce4ec, #e3f2fd); /* putih, pink soft, biru soft */
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Layer untuk pita background */
+    .ribbon-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0; /* paling belakang */
+      pointer-events: none; /* biar ga ganggu klik */
+    }
+
+    .ribbon {
+      position: absolute;
+      top: -50px;
+      font-size: 30px;
+      animation: fall linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    /* Semua konten utama */
+    .content {
+      position: relative;
+      z-index: 1; /* di atas pita */
+    }
+
+    .top-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 50px 20px;
+    }
+
+    /* Foto diri */
+    .photo-container {
+      width: 240px;
+      height: 140px;
+      border: 4px solid #90caf9;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Musik */
+    .music-section {
+      flex: 1;
+      max-width: 420px;
+      padding: 20px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #bbdefb, #f8bbd0, #ffffff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .music-section h3 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #1565c0;
+    }
+    .audio-player {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .audio-player audio {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .playlist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .playlist li {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-align: center;
+      font-weight: bold;
+      color: #c2185b;
+    }
+    .playlist li:hover {
+      background: #f48fb1;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .about, .hobi, .pengalaman {
+      max-width: 800px;
+      margin: 40px auto;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Foto pacar */
+    .partner-photos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      max-width: 900px;
+    }
+    .partner-photos img {
+      width: 180px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 3px solid #f8bbd0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Pita background -->
+  <div class="ribbon-container" id="ribbons"></div>
+
+  <!-- Konten utama -->
+  <div class="content">
+    <div class="top-section">
+      <div class="photo-container">
+        <img src="fotodiri.jpg" alt="Foto Diri">
+      </div>
+
+      <div class="music-section">
+        <h3>Playlist Musik</h3>
+        <div class="audio-player">
+          <audio id="player" controls>
+            <source src="lagu1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="playlist">
+          <ul>
+            <li onclick="playSong('lagu1.mp3')">My Everything</li>
+            <li onclick="playSong('lagu2.mp3')">Chemtrails Over The Country Club</li>
+            <li onclick="playSong('lagu3.mp3')">Journey Mercies</li>
+            <li onclick="playSong('lagu4.mp3')">Wildflower</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="about">
+      <h2>Tentang Saya</h2>
+      <p>Halo, nama saya Selvia Laura,saya bersekolah di SMAN 1 TUKKA</p>
+    </div>
+
+    <div class="hobi">
+      <h2>Hobi</h2>
+      <p>Saya suka mendengarkan musik dan menghayal.</p>
+    </div>
+
+    <div class="pengalaman">
+      <h2>Pengalaman</h2>
+      <p>Saya pernah bersekolah di SMPN 2 PANDAN NAULI dan Gagal masuk SMA Favorit saya yaitu SMA MATAULI.</p>
+    </div>
+
+        <div class="pengalaman">
+      <h2>My Boy Frend</h2>
+    </div>
+
+    <div class="partner-photos">
+      <img src="pacar1.jpg" alt="Foto Pacar 1">
+      <img src="pacar2.jpg" alt="Foto Pacar 2">
+      <img src="pacar3.jpg" alt="Foto Pacar 3">
+    </div>
+  </div>
+
+  <script>
+    // bikin pita
+    const container = document.getElementById("ribbons");
+    for (let i = 0; i < 25; i++) {
+      let ribbon = document.createElement("div");
+      ribbon.className = "ribbon";
+      ribbon.innerText = "🎀";
+      ribbon.style.left = Math.random() * 100 + "vw";
+      ribbon.style.animationDuration = 3 + Math.random() * 5 + "s";
+      container.appendChild(ribbon);
+    }
+
+    // playlist
+    function playSong(song) {
+      var player = document.getElementById("player");
+      player.src = song;
+      player.play();
+    }
+  </script>
+</body>
+</html>
